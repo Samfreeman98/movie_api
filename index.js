@@ -1,3 +1,11 @@
+const express = require("express"),
+  morgan = require("morgan"),
+  // imports built in node modules for fs and path
+  fs = require("fs"),
+  path = require("path");
+
+const app = express();
+
 //creates a write stream
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log,txt"), {
   flags: "a",
@@ -62,6 +70,8 @@ let topHorrorMovies = [
 
 //sets up the logger
 app.use(morgan("combined", { stream: accessLogStream }));
+app.use(express.static("public"));
+
 
 app.get("/", (req, res) => {
   res.send("What's your favorite scary movie?");
