@@ -62,3 +62,13 @@ let topHorrorMovies = [
 
 //sets up the logger
 app.use(morgan("combined", { stream: accessLogStream }));
+
+app.get("/", (req, res) => {
+  res.send("What's your favorite scary movie?");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
