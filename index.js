@@ -72,6 +72,9 @@ let topHorrorMovies = [
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
 
+app.get("/movies", (req, res) => {
+  res.json(topHorrorMovies);
+});
 
 app.get("/", (req, res) => {
   res.send("What's your favorite scary movie?");
