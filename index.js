@@ -1,3 +1,8 @@
+//creates a write stream
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "log,txt"), {
+  flags: "a",
+});
+
 let topHorrorMovies = [
   {
     Title: "Scream 5",
@@ -55,3 +60,5 @@ let topHorrorMovies = [
   },
 ];
 
+//sets up the logger
+app.use(morgan("combined", { stream: accessLogStream }));
