@@ -7,7 +7,7 @@ const express = require("express"),
 const app = express();
 
 //creates a write stream
-const accessLogStream = fs.createWriteStream(path.join(__dirname, "log,txt"), {
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
 
