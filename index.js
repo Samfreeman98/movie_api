@@ -158,6 +158,20 @@ app.delete("/users/:id/:movieTitle", (req, res) => {
   }
 })
 
+//DELETE
+app.delete("/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  let user = users.find( user => user.id == id);
+
+  if (user){
+    users = users.filter( user => user.id == id);
+    res.status(200).send(`user ${id} has been deleted`);;
+  } else {
+    res.status(400).send("no such user");
+  }
+})
+
 //sets up the logger
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
