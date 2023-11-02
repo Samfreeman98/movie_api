@@ -2,9 +2,13 @@ const express = require("express"),
   morgan = require("morgan"),
   // imports built in node modules for fs and path
   fs = require("fs"),
-  path = require("path");
+  path = require("path"),
+  bodyParser = require("body-parser"),
+  uuid = require("uuid");
 
 const app = express();
+
+app.use(bodyParser.json());
 
 //creates a write stream
 const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
@@ -17,7 +21,6 @@ let users = [
     name: "Billy",
     favoriteMovies: ["Insidious"],
   },
-
   {
     id: 2,
     name: "Spencer",
