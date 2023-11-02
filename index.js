@@ -73,7 +73,34 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
 
 app.get("/movies", (req, res) => {
-  res.json(topHorrorMovies);
+  res.status(200).json(movies);
+});
+
+app.get("/users", (req, res) => {
+  res.status(200).json(users);
+});
+
+app.get("/movies/:title", (req, res) => {
+  const { title } = req.params;
+  const movie = movies.find( movie => movie.Title === title);
+
+  if (movie) {
+    res.status(200).json(movie);
+  } else {
+    res.status(400).send("no such movie")
+  }
+
+});
+
+app.get("/movies/:directorName", (req, res) => {
+  const { directorName } = req.params;
+  const director = movies.find(movie => movie.director === directorName);
+  
+  if (director) {
+    res.status(200).json(director);
+  } else {
+    res.status(400).send("no such director")
+  }
 });
 
 app.get("/", (req, res) => {
