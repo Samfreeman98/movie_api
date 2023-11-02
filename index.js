@@ -22,50 +22,74 @@ let topHorrorMovies = [
     Director: "James Wan",
   },
 
+];
+
+let movies = [
   {
-    Title: "Annabelle",
-    Director: "John R. Leonetti",
-  },
+    "Title":"Scream 5",
+    "Director": {
+      "Name":"Matt Bettinelli-Opin, Tyler Gillett",
+  }},
 
   {
-    Title: "Insidious",
-    Director: "James Wan",
-  },
+    "Title":"The Conjuring 2",
+    "Director":{
+      "Name": "James Wan",
+  }},
 
   {
-    Title: "IT",
-    Director: "Andy Muschietti",
-  },
+    "Title":"Annabelle",
+    "Director": {
+      "Name": "John R. Leonetti",
+  }},
 
   {
-    Title: "A Nightmare on Elm Street",
-    Director: "Samuel Bayer",
-  },
+    "Title":"Insidious",
+    "Director": {
+     "Name": "James Wan",
+  }},
 
   {
-    Title: "The Nun",
-    Director: "Corin Hardy",
-  },
+    "Title":"IT",
+    "Director": {
+     "Name": "Andy Muschietti",
+  }},
 
   {
-    Title: "The Meg",
-    Director: "Jon Turteltaub",
-  },
+    "Title":"A Nightmare on Elm Street",
+    "Director": {
+      "name":"Samuel Bayer",
+  }},
 
   {
-    Title: "Smile",
-    Director: "Parker Finn",
-  },
+    "Title":"The Nun",
+    "Director": {
+     "Name": "Corin Hardy",
+  }},
 
   {
-    Title: "The Curese of La Llorona",
-    Director: "Michael Chaves",
-  },
+    "Title":"The Meg",
+    "Director": {
+    "Name":"Jon Turteltaub",
+  }},
 
   {
-    Title: "The ring",
-    Director: "Gore Verbinski",
-  },
+    "Title":"Smile",
+    "Director": {
+     "Name": "Parker Finn",
+  }},
+
+  {
+    "Title":"The Curese of La Llorona",
+    "Director": {
+     "Name": "Michael Chaves",
+  }},
+
+  {
+    "Title":"The ring",
+    "Director": {
+     "Name": "Gore Verbinski",
+  }},
 ];
 
 //sets up the logger
