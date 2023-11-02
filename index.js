@@ -128,9 +128,10 @@ app.get("/movies/:title", (req, res) => {
 
 });
 
-app.get("/movies/:directorName", (req, res) => {
+//READ
+app.get("/movies/director/:directorName", (req, res) => {
   const { directorName } = req.params;
-  const director = movies.find(movie => movie.director === directorName);
+  const director = movies.find(movie => movie.Director.Name === directorName).Director;
   
   if (director) {
     res.status(200).json(director);
