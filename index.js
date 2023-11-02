@@ -107,15 +107,17 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-
+//READ
 app.get("/movies", (req, res) => {
   res.status(200).json(movies);
 });
 
+//READ
 app.get("/users", (req, res) => {
   res.status(200).json(users);
 });
 
+//READ
 app.get("/movies/:title", (req, res) => {
   const { title } = req.params;
   const movie = movies.find( movie => movie.Title === title);
@@ -140,10 +142,12 @@ app.get("/movies/director/:directorName", (req, res) => {
   }
 });
 
+//READ
 app.get("/", (req, res) => {
   res.send("What's your favorite scary movie?");
 });
 
+//READ
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
