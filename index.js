@@ -71,6 +71,8 @@ let topHorrorMovies = [
 //sets up the logger
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
+app.use(bodyParser.json());
+
 
 app.get("/movies", (req, res) => {
   res.status(200).json(movies);
