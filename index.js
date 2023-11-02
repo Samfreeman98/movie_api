@@ -11,16 +11,23 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
 
-let topHorrorMovies = [
+let users = [
   {
-    Title: "Scream 5",
-    Director: "Matt Bettinelli-Opin, Tyler Gillett",
+    id: 1,
+    name: "Billy",
+    favoriteMovies: ["Insidious"],
   },
 
   {
-    Title: "The Conjuring 2",
-    Director: "James Wan",
+    id: 2,
+    name: "Spencer",
+    favoriteMovies: ["Smile"],
   },
+  {
+    id: 3,
+    name: "Abby",
+    favoriteMovies: ["Annabell"],
+  }
 
 ];
 
