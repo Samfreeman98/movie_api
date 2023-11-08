@@ -147,6 +147,20 @@ app.put("/users/:id", (req, res) => {
   }
 })
 
+//CREATE
+app.post("/users/:id/:movieTitle", (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find( user => user.id == id);
+
+  if (user){
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);;
+  } else {
+    res.status(400).send("no such user");
+  }
+})
+
 //DELETE
 app.delete("/users/:id/:movieTitle", (req, res) => {
   const { id, movieTitle } = req.params;
