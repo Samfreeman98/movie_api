@@ -17,19 +17,19 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 
 let users = [
   {
-    id: 1,
-    name: "Billy",
-    favoriteMovies: ["Insidious"],
+    "id": 1,
+    "name": "Billy",
+    "favoriteMovies": [],
   },
   {
-    id: 2,
-    name: "Spencer",
-    favoriteMovies: ["Smile"],
+    "id": 2,
+    "name": "Spencer",
+    "favoriteMovies": ["Smile"],
   },
   {
-    id: 3,
-    name: "Abby",
-    favoriteMovies: ["Annabell"],
+    "id": 3,
+    "name": "Abby",
+    "favoriteMovies": ["Annabell"],
   }
 
 ];
