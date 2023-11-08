@@ -119,6 +119,19 @@ let movies = [
   }},
 ];
 
+//CREATE
+app.post("/users", (req, res) => {
+  const newUser = req.body;
+
+  if (newUser.name) {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).json(newUser); 
+  } else {
+    res.status(400).send("users need name")
+  }
+})
+
 //sets up the logger
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
@@ -145,9 +158,9 @@ app.get("/movies/:title", (req, res) => {
 
 });
 
-app.get("/movies/:directorName", (req, res) => {
+app.get("/movies/director/:directorName", (req, res) => {
   const { directorName } = req.params;
-  const director = movies.find(movie => movie.director === directorName);
+  const director = movies.find(movie => movie.Director.Name === directorName);
   
   if (director) {
     res.status(200).json(director);
@@ -156,9 +169,9 @@ app.get("/movies/:directorName", (req, res) => {
   }
 });
 
-app.get("/movies/:genreName", (req, res) => {
+app.get("/movies/genre/:genreName", (req, res) => {
   const { genreName } = req.params;
-  const genre = movies.find(movie => movie.genre === genreName);
+  const genre = movies.find(movie => movie.Genre === genreName);
   
   if (genre) {
     res.status(200).json(genre);
