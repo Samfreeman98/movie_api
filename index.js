@@ -37,6 +37,7 @@ let users = [
 let movies = [
   {
     "Title":"Scream 5",
+    "Genre": "Slasher",
     "Director": {
       "Name":"Matt Bettinelli-Opin, Tyler Gillett",
   }
@@ -45,6 +46,7 @@ let movies = [
 
   {
     "Title":"The Conjuring 2",
+    "Genre": "Suspense",
     "Director":{
       "Name": "James Wan",
   }
@@ -53,6 +55,7 @@ let movies = [
 
   {
     "Title":"Annabelle",
+    "Genre": "Thriller",
     "Director": {
       "Name": "John R. Leonetti",
   }
