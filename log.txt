@@ -134,3 +134,5 @@
 ::1 - - [08/Nov/2023:04:32:21 +0000] "GET /movies/director/James%20Wan HTTP/1.1" 200 78 "-" "PostmanRuntime/7.34.0"
 ::1 - - [08/Nov/2023:04:44:16 +0000] "PUT /users HTTP/1.1" 404 144 "-" "PostmanRuntime/7.34.0"
 ::1 - - [08/Nov/2023:04:44:50 +0000] "PUT /users HTTP/1.1" 404 144 "-" "PostmanRuntime/7.34.0"
+::1 - - [09/Nov/2023:03:37:10 +0000] "DELETE /movies/Annabelle HTTP/1.1" 404 158 "-" "PostmanRuntime/7.34.0"
+::1 - - [09/Nov/2023:03:37:32 +0000] "DELETE /movies/title/Annabelle HTTP/1.1" 404 164 "-" "PostmanRuntime/7.34.0"
