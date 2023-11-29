@@ -56,6 +56,32 @@ app.post("/users", async (req, res) => {
   });
 });
 
+// CREATE Add a movie 
+app.post("/movies", async (req, res) => {
+  await Movies.findOne({ Title: req.body.Title })
+  .then((Movies) => {
+    if (movies) {
+      return res.status(400).send(req.body.Title + "already exists");
+    } else {
+      Movies
+      .create({ 
+        Title: req.body.Title,
+        Director: req.body.Director,
+        Description: req.body.Description,
+      })
+      .then((user) =>{res.status(201).json(user) })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send("Error: " + error);
+  });
+});
+
 
 
 app.get("/movies", (req, res) => {
