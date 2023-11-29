@@ -255,6 +255,21 @@ app.get("/movies/director_description/:Director", async (req, res) => {
   });
 });
 
+//READ get genre description by genre
+app.get("/movies/genre_description/:Genre", async (req, res) => {
+  await Movies.findOne({ "Genre.Name": req.params.Genre})
+  .then((movie) => {
+    if (!movie) {
+      return res.status(400).send("Error: " + req.params.Genre + "was not found")
+    } else {
+    res.status(200).json(movie.Genre.Description);
+    }
+  })
+
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 app.get("/", (req, res) => {
