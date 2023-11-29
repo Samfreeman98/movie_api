@@ -119,8 +119,24 @@ app.put("/users/:Username", async (req, res) => {
   });
 
 
-app.get("/movies", (req, res) => {
-  res.status(200).json(movies);
+//DELETE movie from user's favorite movies
+app.delete("/users/:Username/movies/:MovieId", async (req, res) => {
+  await Users.findOneAndUpdate({ Username: req.params.Username},
+    {
+      $pull: {FavoriteMovies: req.params.MovieID },
+    },
+    { new: true }) //this line makes sure the updated doc is returned
+    .then((updatedUser) => {
+      if (!updatedUser) {
+        return res.status(400).send(req.params.Username + " User was not found");
+      } else {
+        res.json(updatedUser);
+      };
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 app.get("/users", (req, res) => {
