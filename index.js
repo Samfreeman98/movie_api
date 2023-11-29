@@ -4,9 +4,15 @@ const express = require("express"),
   fs = require("fs"),
   path = require("path"),
   bodyParser = require("body-parser"),
-  uuid = require("uuid");
+  uuid = require("uuid"),
+  mongoose = require("mongoose"),
+  Models = require("./models.js"),
+  Movies = Models.Movie,
+  Users = Models.User;
 
 const app = express();
+
+mongoose.connect("mongodb://127.0.0.1:27017/myflix", { useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.json());
 
