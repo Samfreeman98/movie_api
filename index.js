@@ -207,6 +207,22 @@ app.get("/movies/title/:Title", async (req, res) => {
   });
 });
 
+//READ get movies by director name
+app.get("/movies/directors/:Director", async (req, res) => {
+  await Movies.find({ "Director.Name" : req.params.Director})
+  .then((movies) => {
+    if (movies.length == 0) {
+      return res.status(400).send("Error: No movies found with the director" + req.params.Director + "name")
+    } else {
+    res.status(200).json(movies)
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 });
 
 app.get("/", (req, res) => {
