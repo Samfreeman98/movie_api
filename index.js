@@ -82,6 +82,21 @@ app.post("/movies", async (req, res) => {
   });
 });
 
+//Add a movie title to a users favorite movie by username
+app.post("/users/:Username/:movies/:MovieId", async (req, res) => {
+  await Users.findOneAndUpdate({ Username: req.params.Username},
+    {
+      $push: {FavoriteMovies: req.params.MovieID }
+    },
+    { new: true }) //this line makes sure the updated doc is returned
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 
 app.get("/movies", (req, res) => {
