@@ -223,6 +223,22 @@ app.get("/movies/directors/:Director", async (req, res) => {
   });
 });
 
+//READ get movies by genre
+app.get("/movies/genre/:Genre", async (req, res) => {
+  await Movies.find({ "Genre.Name": req.params.Genre})
+  .then((movies) => {
+    if (movies.length == 0) {
+      return res.status(400).send("Error: " + req.params.Director + "was not found")
+    } else {
+    res.status(200).json(movies)
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 });
 
 app.get("/", (req, res) => {
