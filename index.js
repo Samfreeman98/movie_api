@@ -139,42 +139,6 @@ app.delete("/users/:Username/movies/:MovieId", async (req, res) => {
     });
 });
 
-app.get("/users", (req, res) => {
-  res.status(200).json(users);
-});
-
-app.get("/movies/:title", (req, res) => {
-  const { title } = req.params;
-  const movie = movies.find( movie => movie.Title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(400).send("no such movie")
-  }
-
-});
-
-app.get("/movies/director/:directorName", (req, res) => {
-  const { directorName } = req.params;
-  const director = movies.find(movie => movie.Director.Name === directorName);
-  
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send("no such director")
-  }
-});
-
-app.get("/movies/genre/:genreName", (req, res) => {
-  const { genreName } = req.params;
-  const genre = movies.find(movie => movie.Genre === genreName);
-  
-  if (genre) {
-    res.status(200).json(genre);
-  } else {
-    res.status(400).send("no such genre")
-  }
 });
 
 app.get("/", (req, res) => {
