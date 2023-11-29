@@ -98,6 +98,26 @@ app.post("/users/:Username/:movies/:MovieId", async (req, res) => {
     });
 });
 
+//UPDATE user by username
+app.put("/users/:Username", async (req, res) => {
+  await Users.findOneAndUpdate({ Username: req.params.Username},
+    { $set:
+      {
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      }
+    },
+    { new: true }) //this line makes sure updated doc is returned
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  });
+
 
 app.get("/movies", (req, res) => {
   res.status(200).json(movies);
