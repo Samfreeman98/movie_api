@@ -191,6 +191,22 @@ app.get("/users/:Username", async (req,res) => {
   });
 });
 
+//READ get movie by title
+app.get("/movies/title/:Title", async (req, res) => {
+  await Movies.findOne({ Title: req.params.Title})
+  .then((movie) => {
+    if (!movie) {
+      return res.status(400).send("Error: No movies found with the" + req.params.Title + "genre type.")
+    } else {
+    res.status(200).json(movie)
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 });
 
 app.get("/", (req, res) => {
