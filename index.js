@@ -167,6 +167,18 @@ app.get("/movies", async (req, res) => {
   });
 });
 
+//READ get all users
+app.get("/users", async (req, res) => {
+  await Users.find()
+  .then((users) => {
+    res.status(201).json(users);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 });
 
 app.get("/", (req, res) => {
