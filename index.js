@@ -59,7 +59,7 @@ app.post("/users", async (req, res) => {
 // CREATE Add a movie 
 app.post("/movies", async (req, res) => {
   await Movies.findOne({ Title: req.body.Title })
-  .then((Movies) => {
+  .then((movies) => {
     if (movies) {
       return res.status(400).send(req.body.Title + "already exists");
     } else {
@@ -83,10 +83,10 @@ app.post("/movies", async (req, res) => {
 });
 
 //Add a movie title to a users favorite movie by username
-app.post("/users/:Username/:movies/:MovieId", async (req, res) => {
+app.post("/users/:Username/movies/:MovieId", async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username},
     {
-      $push: {FavoriteMovies: req.params.MovieID }
+      $push: {FavoriteMovies: req.params.MovieId }
     },
     { new: true }) //this line makes sure the updated doc is returned
     .then((updatedUser) => {
@@ -123,7 +123,7 @@ app.put("/users/:Username", async (req, res) => {
 app.delete("/users/:Username/movies/:MovieId", async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username},
     {
-      $pull: {FavoriteMovies: req.params.MovieID },
+      $pull: {FavoriteMovies: req.params.MovieId },
     },
     { new: true }) //this line makes sure the updated doc is returned
     .then((updatedUser) => {
@@ -228,7 +228,7 @@ app.get("/movies/genre/:Genre", async (req, res) => {
   await Movies.find({ "Genre.Name": req.params.Genre})
   .then((movies) => {
     if (movies.length == 0) {
-      return res.status(400).send("Error: " + req.params.Director + "was not found")
+      return res.status(400).send("Error: " + req.params.Genre + "was not found")
     } else {
     res.status(200).json(movies)
     }
