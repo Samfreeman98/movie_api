@@ -1,165 +1,156 @@
 <!DOCTYPE html>
 <html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>movie_api app</title>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Horror Movies</title>
-</head>
-
-<body>
-  <p>
-    This web application offers access to a database of information about
-    horror movies.
-  </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Business Logic</th>
-        <th>URL</th>
-        <th>HTTP method</th>
-        <th>Request body data format</th>
-        <th>Response body data format</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Return a list of ALL movies to user</td>
-        <td>/movies</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data about all movies</td>
-      </tr>
-      <tr>
-        <td>Return data about a single movie by title to the user</td>
-        <td>/movies/[title]</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>
-          A JSON object holding data about a single movie, containing title
-          and director. Ex:
-          <code>
-              { 
-                "Title":"Scream 5", 
-                "Director": { "Name":"Matt Bettinelli-Opin, Tyler Gillett", 
-            }},
-            { 
-              "Title":"The Conjuring 2", 
-              "Director":{
-              "Name": "James Wan", 
-            }}
+  <body>
+    <p>
+      This web application offers users access to a database of information
+      about a variety of movies. Users will be able to register, update account
+      information, and add movies to a list of their favorites
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Endpoint</th>
+          <th>URL</th>
+          <th>HTTP method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Return a list of ALL movies to user</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about all movies</td>
+        </tr>
+        <tr>
+          <td>Return data about a single movie by title to the user</td>
+          <td>/movies/title/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object holding data about a single movie, containing title,
+            director, genre, and whether it is featured or not. Ex:
+            <code>
+              { "Title": "Inception", "Description": "A thief who steals
+              corporate secrets through the use of dream-sharing technology is
+              given the inverse task of planting an idea into the mind of a
+              CEO.", "genre": { "Name": "Science Fiction", "Description":
+              "Exploring speculative concepts often involving advanced
+              technology, space exploration, and extraterrestrial life." },
+              "Director": { "Name": "Christopher Nolan", "Bio": "Christopher
+              Nolan is a British-American film director, producer, and
+              screenwriter. He is known for his distinctive filmmaking style and
+              nonlinear storytelling.", "Birth": “1970”, }, "Featured": true }
             </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return data about a director by name</td>
-        <td>/movies/director/[directorName]</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>
-          A JSON object holding data about a single director, containing
-          director name. Ex:
-          <code>
-            { 
-            "directorName": "James Wan", 
-            } 
-           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return data about a Genre by name</td>
-        <td>/movies/genre/[genreName]</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>
-          A JSON object holding data about a single genre, containing
-          a genre name. Ex:
-          <code>
-            { 
-            "Genre": "Thriller", 
-            } 
-           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow new users to register</td>
-        <td>/users</td>
-        <td>POST</td>
-        <td>
-          A JSON object holding data about the user to add Ex:
-          <code> 
-            { 
-              "name": "Spencer", 
-              "favoriteMovies": [] 
-            } 
-          </code>
-        </td>
-        <td>
-          A JSON object holding data about the user that was added, including
-          an ID. Ex:
-          <code>
-              { "name": "Matthew",
-                "favoriteMovies": [], 
-                "id": "903da19e3-259b-460c-bd6f-34ae838876b0" 
-              }
-          </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow users to update their user info</td>
-        <td>/users/[id]</td>
-        <td>PUT</td>
-        <td>
-          A JSON object holding data about the user which needs to be updated:
-          <code> 
-            { 
-            "name": "Spencer", 
-            "favoriteMovies": [] 
-          } 
-          </code>
-        </td>
-        <td>
-          A JSON object holding data about the updated user information. Ex:
-          <code> 
-            { 
-              "id": 2, 
-              "name": "Spencer", 
-              "favoriteMovies": [] 
-            } 
-          </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow users to add a movie to their list of favorites</td>
-        <td>/users/[id]/[movieTitle]</td>
-        <td>POST</td>
-        <td>None</td>
-        <td>
-          Text message indicating whether the user added the movie
-          successfully.
-        </td>
-      </tr>
-      <tr>
-        <td>Allow users to remove a movie from their list of favorites</td>
-        <td>/users/[id]/[movieTitle]</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>
-          Text message indicating whether the user removed the movie
-          successfully.
-        </td>
-      </tr>
-      <tr>
-        <td>Allow existing users to deregister</td>
-        <td>/users/[id]</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>
-          Text message indicating whether the user deregister successfully.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</body>
+          </td>
+        </tr>
 
+        <tr>
+          <td>Return data about a director by name</td>
+          <td>/movies/directors/:Director</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object holding data about a single director, containing
+            director name, bio, and birthyear. Ex:
+            <code>
+              "Director": { "Name": "Steven Spielberg", "Bio": "Steven Spielberg
+              is known for his contributions to the adventure and science
+              fiction genres.", "Birth": "1946" }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a Genre by name</td>
+          <td>/movies/genre/:Genre</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            A JSON object holding data about a single genre, containing a genre
+            name and description. Ex:
+            <code>
+              "Genre": { "Name": "Crime", "Description": "Focuses on criminal
+              activities, law enforcement, and the justice system." }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>
+            A JSON object holding data about the user to add including username,
+            password, email, and birthday Ex:
+            <code>
+              { "Username": "Eric", "Password": "Ericspassword123", "Email":
+              "Eric@fakeemail.com", "Birthday": "1995-04-06" }
+            </code>
+          </td>
+          <td>
+            A JSON object holding data about the user that was added, including
+            an ID. Ex:
+            <code>
+              { "Username": "Eric", "Password": "Ericspassword123", "Email":
+              "Eric@fakeemail.com", "Birthday": "1995-04-06T00:00:00.000Z",
+              "FavoriteMovies": [], "_id": "65693791e808bf6e46df7d7d", }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to update their user info</td>
+          <td>/users/:Username</td>
+          <td>PUT</td>
+          <td>
+            A JSON object holding data about the user which needs to be updated:
+            <code>
+              { "Username": "EricNeff", "Password": "Ericspassword555", "Email":
+              "Eric@fakeemail.com", "Birthday": "1985-06-02" }
+            </code>
+          </td>
+          <td>
+            A JSON object holding data about the updated user information such.
+            Ex:
+            <code>
+              { "_id": "65693791e808bf6e46df7d7d", "Username": "EricNeff",
+              "Password": "Ericspassword555", "Email": "Eric@fakeemail.com",
+              "Birthday": "1985-06-02T00:00:00.000Z", "FavoriteMovies": [] }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to add a movie to their list of favorites</td>
+          <td>/users/:Username/movies/:MovieId</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>
+            Message indicating whether the user added the movie successfully.
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to remove a movie from their list of favorites</td>
+          <td>/users/:Username/movies/:MovieId</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            Message indicating whether the user removed the movie successfully.
+          </td>
+        </tr>
+        <tr>
+          <td>Allow existing users to deregister</td>
+          <td>/users/:Username</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>Message indicating whether the user deregister successfully.</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
 </html>
