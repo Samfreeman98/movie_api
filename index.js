@@ -196,7 +196,7 @@ app.get("/movies/title/:Title", async (req, res) => {
   await Movies.findOne({ Title: req.params.Title})
   .then((movie) => {
     if (!movie) {
-      return res.status(400).send("Error: No movies found with the" + req.params.Title + "genre type.")
+      return res.status(400).send("Error: " + req.params.Title + "was not found")
     } else {
     res.status(200).json(movie)
     }
@@ -212,7 +212,7 @@ app.get("/movies/directors/:Director", async (req, res) => {
   await Movies.find({ "Director.Name" : req.params.Director})
   .then((movies) => {
     if (movies.length == 0) {
-      return res.status(400).send("Error: No movies found with the director" + req.params.Director + "name")
+      return res.status(400).send("Error: " + req.params.Director + "was not found")
     } else {
     res.status(200).json(movies)
     }
