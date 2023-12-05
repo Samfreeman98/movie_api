@@ -22,36 +22,71 @@
           <th>Response body data format</th>
         </tr>
       </thead>
+
       <tbody>
+
         <tr>
           <td>Return a list of ALL movies to user</td>
           <td>/movies</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about all movies</td>
+          <td>A JSON object holding data about all movies. Example:
+            <pre>
+              <code>
+                [
+                  {
+                      "Genre": {
+                          "Name": "Science Fiction",
+                          "Description": "Exploring speculative concepts often involving advanced technology, space exploration, and extraterrestrial life."
+                      },
+                      "Director": {
+                          "Name": "Christopher Nolan",
+                          "Bio": "Christopher Nolan was a great filmmaker known for his distinctive filmmaking style and nonlinear storytelling.",
+                          "Birth": "1970"
+                      },
+                      "_id": "655cfcdc7c674b9440cf5ecb",
+                      "Title": "Inception",
+                      "Description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+                      "Featured": true
+                  },
+                  ...
+                ]  
+              </code>
+            </pre>
+          </td>
         </tr>
+
+
         <tr>
           <td>Return data about a single movie by title to the user</td>
-          <td>/movies/title/:title</td>
+          <td>/movies/title/:Title</td>
           <td>GET</td>
           <td>None</td>
           <td>
             A JSON object holding data about a single movie, containing title,
-            director, genre, and whether it is featured or not. Ex:
-            <code>
-              { "Title": "Inception", "Description": "A thief who steals
-              corporate secrets through the use of dream-sharing technology is
-              given the inverse task of planting an idea into the mind of a
-              CEO.", "genre": { "Name": "Science Fiction", "Description":
-              "Exploring speculative concepts often involving advanced
-              technology, space exploration, and extraterrestrial life." },
-              "Director": { "Name": "Christopher Nolan", "Bio": "Christopher
-              Nolan is a British-American film director, producer, and
-              screenwriter. He is known for his distinctive filmmaking style and
-              nonlinear storytelling.", "Birth": “1970”, }, "Featured": true }
-            </code>
+            director, genre, and whether it is featured or not. Example:
+            <pre>
+              <code>
+                {
+                  "Genre": {
+                      "Name": "Adventure",
+                      "Description": "Involves exciting and often dangerous journeys or quests."
+                  },
+                  "Director": {
+                      "Name": "Steven Spielberg",
+                      "Bio": "Steven Spielberg is known for his contributions to the adventure and science fiction genres.",
+                      "Birth": "1946"
+                  },
+                  "_id": "655d0eea7c674b9440cf5ed8",
+                  "Title": "Jurassic Park",
+                  "Description": "A theme park with genetically engineered dinosaurs turns into a nightmare when the dinosaurs break free.",
+                  "Featured": true
+                }
+              </code>
+            </pre>
           </td>
         </tr>
+
 
         <tr>
           <td>Return data about a director by name</td>
@@ -60,14 +95,20 @@
           <td>None</td>
           <td>
             A JSON object holding data about a single director, containing
-            director name, bio, and birthyear. Ex:
-            <code>
-              "Director": { "Name": "Steven Spielberg", "Bio": "Steven Spielberg
-              is known for his contributions to the adventure and science
-              fiction genres.", "Birth": "1946" }
-            </code>
+            director name, bio, and birthyear. Example:
+            <pre>
+              <code>
+                {
+                  "Name": "Christopher Nolan",
+                  "Bio": "Christopher Nolan was a great filmmaker known for his distinctive filmmaking style and nonlinear storytelling.",
+                  "Birth": "1970"
+                }
+              </code>
+            </pre>
           </td>
         </tr>
+
+
         <tr>
           <td>Return data about a Genre by name</td>
           <td>/movies/genre/:Genre</td>
@@ -75,13 +116,15 @@
           <td>None</td>
           <td>
             A JSON object holding data about a single genre, containing a genre
-            name and description. Ex:
+            name and description. Example:
             <code>
               "Genre": { "Name": "Crime", "Description": "Focuses on criminal
               activities, law enforcement, and the justice system." }
             </code>
           </td>
         </tr>
+
+
         <tr>
           <td>Allow new users to register</td>
           <td>/users</td>
@@ -89,60 +132,124 @@
           <td>
             A JSON object holding data about the user to add including username,
             password, email, and birthday Ex:
-            <code>
-              { "Username": "Eric", "Password": "Ericspassword123", "Email":
-              "Eric@fakeemail.com", "Birthday": "1995-04-06" }
-            </code>
+            <pre>
+              <code>
+                {
+                  "Username": "Eric",
+                  "Password": "Ericspassword123",
+                  "Email": "Eric@fakeemail.com",
+                  "Birthday": "1995-04-06"
+                }
+              </code>
+            </pre>  
           </td>
           <td>
             A JSON object holding data about the user that was added, including
             an ID. Ex:
-            <code>
-              { "Username": "Eric", "Password": "Ericspassword123", "Email":
-              "Eric@fakeemail.com", "Birthday": "1995-04-06T00:00:00.000Z",
-              "FavoriteMovies": [], "_id": "65693791e808bf6e46df7d7d", }
-            </code>
+            <pre>
+              <code>
+                {
+                  "Username": "Eric",
+                  "Password": "Ericspassword123",
+                  "Email": "Eric@fakeemail.com",
+                  "Birthday": "1995-04-06T00:00:00.000Z",
+                  "FavoriteMovies": [],
+                  "_id": "656e8bb5ca0dde01bff60ead",
+                  "__v": 0
+                }
+              </code>
+            </pre>
           </td>
         </tr>
+
+
         <tr>
           <td>Allow users to update their user info</td>
           <td>/users/:Username</td>
           <td>PUT</td>
           <td>
-            A JSON object holding data about the user which needs to be updated:
-            <code>
-              { "Username": "EricNeff", "Password": "Ericspassword555", "Email":
-              "Eric@fakeemail.com", "Birthday": "1985-06-02" }
-            </code>
+            A JSON object holding data about the user which needs to be updated. Example:
+            <pre>
+              <code>
+                { 
+                  "Username": "EricNeff", 
+                  "Password": "Ericspassword555", 
+                  "Email": "Eric@fakeemail.com", 
+                  "Birthday": "1985-06-02" 
+                }
+              </code>
+            </pre>
           </td>
           <td>
-            A JSON object holding data about the updated user information such.
-            Ex:
-            <code>
-              { "_id": "65693791e808bf6e46df7d7d", "Username": "EricNeff",
-              "Password": "Ericspassword555", "Email": "Eric@fakeemail.com",
-              "Birthday": "1985-06-02T00:00:00.000Z", "FavoriteMovies": [] }
-            </code>
+            A JSON object holding data about the updated user information
+            Example:
+            <pre>
+              <code>
+                {
+                  "_id": "656e8bb5ca0dde01bff60ead",
+                  "Username": "EricNeff",
+                  "Password": "Ericspassword555",
+                  "Email": "Eric@fakeemail.com",
+                  "Birthday": "1985-06-02T00:00:00.000Z",
+                  "FavoriteMovies": [],
+                  "__v": 0
+                }
+              </code>
+            </pre>
           </td>
         </tr>
+
+
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
           <td>/users/:Username/movies/:MovieId</td>
           <td>POST</td>
           <td>None</td>
           <td>
-            Message indicating whether the user added the movie successfully.
+            <pre>
+              <code>
+                {
+                  "_id": "655d24c0b9489d464552d9a9",
+                  "Username": "Sallymay",
+                  "Password": "Sillsally",
+                  "Email": "salmay@fakeemail.com",
+                  "Birthday": "2001-05-23T00:00:00.000Z",
+                  "FavoriteMovies": [
+                      "655d01727c674b9440cf5ece",
+                      "655cfcdc7c674b9440cf5ecb"
+                  ]
+                }
+              </code>
+            </pre>
           </td>
         </tr>
+
+
         <tr>
           <td>Allow users to remove a movie from their list of favorites</td>
           <td>/users/:Username/movies/:MovieId</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
-            Message indicating whether the user removed the movie successfully.
+            Message indicating whether the user removed the movie successfully. Example:
+            <pre>
+              <code>
+                {
+                  "_id": "655d24c0b9489d464552d9a9",
+                  "Username": "Sallymay",
+                  "Password": "Sillsally",
+                  "Email": "salmay@fakeemail.com",
+                  "Birthday": "2001-05-23T00:00:00.000Z",
+                  "FavoriteMovies": [
+                      "655d01727c674b9440cf5ece"
+                  ]
+                }
+              </code>
+            </pre>
           </td>
         </tr>
+
+
         <tr>
           <td>Allow existing users to deregister</td>
           <td>/users/:Username</td>
