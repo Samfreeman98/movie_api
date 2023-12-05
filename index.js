@@ -207,41 +207,9 @@ app.get("/movies/title/:Title", async (req, res) => {
   });
 });
 
-//READ get movies by director name
-app.get("/movies/directors/:Director", async (req, res) => {
-  await Movies.find({ "Director.Name" : req.params.Director})
-  .then((movies) => {
-    if (movies.length == 0) {
-      return res.status(400).send("Error: " + req.params.Director + "was not found")
-    } else {
-    res.status(200).json(movies)
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-});
-
-//READ get movies by genre
-app.get("/movies/genre/:Genre", async (req, res) => {
-  await Movies.find({ "Genre.Name": req.params.Genre})
-  .then((movies) => {
-    if (movies.length == 0) {
-      return res.status(400).send("Error: " + req.params.Genre + "was not found")
-    } else {
-    res.status(200).json(movies)
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-});
-
 //READ get data about director by director name
-app.get("/movies/director_description/:Director", async (req, res) => {
-  await Movies.findOne({ "Director.Name": req.params.Director})
+app.get("/movies/directors/:Name", async (req, res) => {
+  await Movies.findOne({ "Director.Name": req.params.Name})
   .then((movie) => {
     if (!movie) {
       return res.status(400).send("Error: " + req.params.Director + "was not found")
@@ -256,7 +224,7 @@ app.get("/movies/director_description/:Director", async (req, res) => {
 });
 
 //READ get genre description by genre
-app.get("/movies/genre_description/:Genre", async (req, res) => {
+app.get("/movies/genre/:Genre", async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.Genre})
   .then((movie) => {
     if (!movie) {
