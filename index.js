@@ -68,7 +68,19 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   Email: String,
   Birthday: Date
 }*/
-app.post("/users", async (req, res) => {
+app.post("/users",
+  //Validation logic here for request
+  [
+    check("Username", "Username is required").isLength({min:5}),
+    check("Username", "Username contains non alphanumeric characters - not allower."),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail()
+  ], async (req, res) => {
+    //check the validation object for errors
+    let errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
   let hashedPassword = Users.hashPassword(req.body.Password);
   await Users.findOne({ Username: req.body.Username }) //Search to see if username already excists with another user
   .then((user) => {
