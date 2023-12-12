@@ -10,6 +10,8 @@ const express = require("express"),
   Movies = Models.Movie,
   Users = Models.User;
 
+const { check, validationResult } = require("express-validatior");
+
 const app = express();
 
 mongoose.connect("mongodb://127.0.0.1:27017/myflix", { useNewUrlParser: true, useUnifiedTopology: true});
