@@ -104,7 +104,13 @@ app.post("/users/:Username/movies/:MovieId", passport.authenticate("jwt", { sess
 });
 
 //UPDATE user by username
-app.put("/users/:Username", passport.authenticate("jwt", { session: false }), async (req, res) => {
+app.put("/users/:Username", passport.authenticate("jwt", { session: false }), 
+  [
+    check("Username", "Username is required").isLength({min: 6}),
+    check("Password", "Password is required"),
+    check("Email", "Email not found").isEmail()
+  ],
+async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username},
     { $set:
       {
