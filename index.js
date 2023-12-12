@@ -14,6 +14,22 @@ const app = express();
 
 mongoose.connect("mongodb://127.0.0.1:27017/myflix", { useNewUrlParser: true, useUnifiedTopology: true});
 
+let userSchema = mongoose.Schema({
+  Username: {type: String, required: true},
+  Password: {type: String, required: true},
+  Email: {type: String, required: true},
+  Birthday: Date,
+  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
+});
+
+userSchema.statics.hashPassword = (password) => {
+  return bcrypt.hasSync(password, 10);
+};
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.Password);
+};
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -51,9 +67,10 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   Birthday: Date
 }*/
 app.post("/users", async (req, res) => {
-  await Users.findOne({ Username: req.body.Username })
+  let hashedPassword = Users.hashPassword(req.body.Password);
+  await Users.findOne({ Username: req.body.Username }) //Search to see if username already excists with another user
   .then((user) => {
-    if (user) {
+    if (user) { // If user already exists, send a response saying so
       return res.status(400).send(req.body.Username + "already exists");
     } else {
       Users
