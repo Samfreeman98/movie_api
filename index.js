@@ -7,6 +7,7 @@ const express = require("express"),
   uuid = require("uuid"),
   mongoose = require("mongoose"),
   Models = require("./models.js"),
+  hashPassword = Models.User.hashPassword,
   Movies = Models.Movie,
   Users = Models.User;
 
