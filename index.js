@@ -15,7 +15,7 @@ const { check, validationResult } = require("express-validator");
 
 const app = express();
 
-mongoose.connect("process.env.CONNECTION_URI", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let userSchema = mongoose.Schema({
   Username: {type: String, required: true},
