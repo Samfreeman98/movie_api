@@ -14,7 +14,7 @@ const { check, validationResult } = require("express-validator");
 
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017/myflix", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://samfreeman402:<password>@myflix.86m57fg.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true});
 
 let userSchema = mongoose.Schema({
   Username: {type: String, required: true},
