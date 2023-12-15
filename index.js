@@ -15,23 +15,7 @@ const { check, validationResult } = require("express-validator");
 
 const app = express();
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-let userSchema = mongoose.Schema({
-  Username: {type: String, required: true},
-  Password: {type: String, required: true},
-  Email: {type: String, required: true},
-  Birthday: Date,
-  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
-});
-
-userSchema.statics.hashPassword = (password) => {
-  return bcrypt.hasSync(password, 10);
-};
-
-userSchema.methods.validatePassword = function(password) {
-  return bcrypt.compareSync(password, this.Password);
-};
+mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
