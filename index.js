@@ -1,15 +1,14 @@
-const express = require("express"),
-  morgan = require("morgan"),
-  // imports built in node modules for fs and path
-  fs = require("fs"),
-  path = require("path"),
-  bodyParser = require("body-parser"),
-  uuid = require("uuid"),
-  mongoose = require("mongoose"),
-  Models = require("./models.js"),
-  hashPassword = Models.User.hashPassword,
-  Movies = Models.Movie,
-  Users = Models.User;
+const mongoose = require("mongoose");
+const express = require("express");
+const  morgan = require("morgan");
+const  fs = require("fs");
+const path = require("path");
+const bodyParser = require("body-parser");
+const uuid = require("uuid");
+const Models = require("./models.js");
+const hashPassword = Models.User.hashPassword;
+const Movies = Models.Movie;
+const Users = Models.User;
 
 const { check, validationResult } = require("express-validator");
 
