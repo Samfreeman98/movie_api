@@ -1,20 +1,17 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const  morgan = require("morgan");
-const  fs = require("fs");
+const app = express();
+const morgan = require("morgan");
+const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
 const uuid = require("uuid");
 const Models = require("./models.js");
-const hashPassword = Models.User.hashPassword;
 const Movies = Models.Movie;
 const Users = Models.User;
 
+
 const { check, validationResult } = require("express-validator");
-
-const app = express();
-
-mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,6 +30,10 @@ app.use(cors({
     return callback(null, true);
 }
 }));
+
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(morgan("combined"));
 
 let auth = require("./auth")(app);
 const passport = require("passport");
