@@ -43,6 +43,10 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
 
+app.get('/', (req, res) => {
+  res.send("Welcome to my movie app!");
+});
+
 //CREATE Add a user
 /* We'll expect JSON in this format
 {
