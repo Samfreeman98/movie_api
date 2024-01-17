@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
-const uuid = require("uuid");
 const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
