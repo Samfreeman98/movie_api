@@ -282,10 +282,6 @@ app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false })
   });
 });
 
-app.get("/", (req, res) => {
-  res.send("What's your favorite scary movie?");
-});
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
