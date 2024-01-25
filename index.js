@@ -6,6 +6,8 @@ const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
 const Models = require("./models.js");
+const auth = require("./auth")(app);
+const http = require("http");
 const Movies = Models.Movie;
 const Users = Models.User;
 
