@@ -32,7 +32,7 @@ app.use(cors({
 
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.use(morgan("common"));
+app.use(morgan("combined"));
 
 let auth = require("./auth")(app);
 const passport = require("passport");
