@@ -12,7 +12,7 @@ const Users = Models.User;
 
 const { check, validationResult } = require("express-validator");
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
