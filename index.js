@@ -54,8 +54,7 @@ app.get('/', (req, res) => {
   ID: Integer,
   Username: String,
   Password: String,
-  Email: String,
-  Birthday: Date
+  Email: String
 }*/
 app.post("/users",
   //Validation logic here for request
@@ -79,8 +78,7 @@ app.post("/users",
       Users.create({ 
         Username: req.body.Username,
         Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
+        Email: req.body.Emails
       })
       .then((user) =>{res.status(201).json(user) })
       .catch((error) => {
