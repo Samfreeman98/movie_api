@@ -148,8 +148,7 @@ async (req, res) => {
       {
         Username: req.body.Username,
         Password: req.body.Password,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
+        Email: req.body.Email
       }
     },
     { new: true }) //this line makes sure updated doc is returned
@@ -159,7 +158,7 @@ async (req, res) => {
     .catch((err) => {
       console.error(err);
     })
-  });
+  );
 
 
 //DELETE movie from user's favorite movies
