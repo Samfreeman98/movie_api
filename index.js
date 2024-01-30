@@ -164,7 +164,8 @@ app.put("/users/:Username", passport.authenticate("jwt", { session: false }),
     })
     .catch((err) => {
       console.error(err);
-    });
+  })
+});
 
 
 //DELETE movie from user's favorite movies
