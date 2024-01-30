@@ -78,7 +78,7 @@ app.post("/users",
       Users.create({ 
         Username: req.body.Username,
         Password: hashedPassword,
-        Email: req.body.Emails
+        Email: req.body.Email
       })
       .then((user) =>{res.status(201).json(user) })
       .catch((error) => {
