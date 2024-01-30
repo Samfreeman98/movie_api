@@ -142,7 +142,14 @@ app.put("/users/:Username", passport.authenticate("jwt", { session: false }),
     check("Password", "Password is required"),
     check("Email", "Email not found").isEmail()
   ],
-async (req, res) => {
+  passport.authenticate('jwt', { session: false }), async (req, res) => {
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  if (req.user.Username !== req.params.Username) {
+    return res.status(400).send('Permission denied');
+  }
   await Users.findOneAndUpdate({ Username: req.params.Username},
     { $set:
       {
