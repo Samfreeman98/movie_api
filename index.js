@@ -272,6 +272,16 @@ app.get("/movies/directors/:Name", passport.authenticate("jwt", { session: false
   });
 });
 
+app.get('/directors', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    const directors = await Directors.find();
+    res.json(directors);
+  } catch (error) {
+    console.error('Error', error);
+    res.status(500).json({ error: 'Error' });
+  }
+});
+
 //READ get genre description by genre
 app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.Genre})
