@@ -299,11 +299,11 @@ app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false })
   });
 });
 
-app.get('/genre',
+app.get('/genres',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
-      const genre = await Genre.find();
+      const genre = await Genres.find();
       res.json(genres);
     } catch (error) {
       console.error('Error', error);
