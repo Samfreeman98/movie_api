@@ -272,16 +272,6 @@ app.get("/movies/directors/:Name", passport.authenticate("jwt", { session: false
   });
 });
 
-app.get("/directors", (req, res) => {
-  Movies.distinct("Director.Name")
-    .then((directors) => {
-      res.status(200).json(directors);
-    })
-    .catch((err) => {
-      res.status(500).send("Error: " + err);
-    });
-});
-
 //READ get genre description by genre
 app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.Genre})
