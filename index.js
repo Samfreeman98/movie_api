@@ -282,6 +282,18 @@ app.get('/directors', passport.authenticate('jwt', { session: false }), async (r
   }
 });
 
+app.get('/genre',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    try {
+      const genre = await Genre.find();
+      res.json(genres);
+    } catch (error) {
+      console.error('Error', error);
+      res.status(500).json({ error: 'Error' });
+    }
+  });
+
 //READ get genre description by genre
 app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.Genre})
@@ -298,18 +310,6 @@ app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false })
     res.status(500).send("Error: " + err);
   });
 });
-
-app.get('/movies/genres',
-  passport.authenticate('jwt', { session: false }),
-  async (req, res) => {
-    try {
-      const genre = await Genres.find();
-      res.json(genres);
-    } catch (error) {
-      console.error('Error', error);
-      res.status(500).json({ error: 'Error' });
-    }
-  });
 
 app.use(express.static("public"));
 
