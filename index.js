@@ -282,17 +282,29 @@ app.get('/movie/directors', passport.authenticate('jwt', { session: false }), as
   }
 });
 
-app.get('movie/genre',
-  passport.authenticate('jwt', { session: false }),
-  async (req, res) => {
-    try {
-      const genre = await Genres.find();
-      res.json(genres);
-    } catch (error) {
-      console.error('Error', error);
-      res.status(500).json({ error: 'Error' });
-    }
-  });
+app.get("/genre", (req, res) => {
+  Movies.distinct("Genre.Name")
+    .then((genres) => {
+      res.status(201).json(genres);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+// Read: Return data about a genre by genre name
+app.get("/genre/:genreName", (req, res) => {
+  Movies.findOne({ "Genre.Name": req.params.genreName })
+    .then((movie) => {
+      res.status(201).json(movie.Genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
 
 //READ get genre description by genre
 app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false }), async (req, res) => {
