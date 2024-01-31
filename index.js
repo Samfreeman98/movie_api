@@ -283,7 +283,7 @@ app.get('/movie/directors', passport.authenticate('jwt', { session: false }), as
 });
 
 app.get("/genre", (req, res) => {
-  Movies.distinct("Genre.Name")
+  Movies.distinct("Genre")
     .then((genres) => {
       res.status(201).json(genres);
     })
