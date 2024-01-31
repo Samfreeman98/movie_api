@@ -299,7 +299,7 @@ app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false })
   });
 });
 
-app.get('/genres',
+app.get('/movies/genres',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
