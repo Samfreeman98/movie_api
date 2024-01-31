@@ -286,7 +286,7 @@ app.get('/genre',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
-      const genre = await Genre.find();
+      const genre = await Genres.find();
       res.json(genres);
     } catch (error) {
       console.error('Error', error);
