@@ -299,6 +299,18 @@ app.get("/movies/genre/:Genre", passport.authenticate("jwt", { session: false })
   });
 });
 
+app.get('/genres',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    try {
+      const genres = await Genres.find();
+      res.json(genres);
+    } catch (error) {
+      console.error('Error', error);
+      res.status(500).json({ error: 'Error' });
+    }
+  });
+
 app.use(express.static("public"));
 
 app.use((err, req, res, next) => {
