@@ -272,7 +272,7 @@ app.get("/movies/directors/:Name", passport.authenticate("jwt", { session: false
   });
 });
 
-app.get('/directors', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.get('/movie/directors', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const directors = await Directors.find();
     res.json(directors);
@@ -282,7 +282,7 @@ app.get('/directors', passport.authenticate('jwt', { session: false }), async (r
   }
 });
 
-app.get('/genre',
+app.get('movie/genre',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
