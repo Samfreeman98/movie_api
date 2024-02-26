@@ -94,7 +94,7 @@ app.post("/users",
   });
 
 // CREATE Add a movie 
-app.post("/movies", async (req, res) => {
+app.post("/movies", passport.authenticate("jwt", { session: false }), async (req, res) => {
   await Movies.findOne({ Title: req.body.Title })
     .then((movies) => {
       if (movies) {
